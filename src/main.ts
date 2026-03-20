@@ -7,7 +7,8 @@ import { validateConfig } from './models/config';
 import { getChangedFiles, getOwners, getPullAuthor, getRefs, getReviewers, getReviews, loadYaml } from './utils';
 
 async function main() {
-    const client = github.getOctokit(core.getInput('repo-token', { required: true }));
+    const token = core.getInput('repo-token', { required: true });
+    const client = github.getOctokit(token);
     const ownerFilePath = core.getInput('config-file', { required: true });
     const assignOwners = core.getBooleanInput('assign-owners', { required: true })
     const requestOwnerReviews = core.getBooleanInput('request-owner-reviews', { required: true })
